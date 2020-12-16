@@ -30,16 +30,16 @@ public class CustomerService {
         return accountRepository.getbalance(accountid);
     }
 
-    public Long deposit(Long amount, Long accountid, String date) {
+    public String deposit(Long amount, Long accountid, String date) {
         Long balance = accountRepository.getbalance(accountid);
         balance+= amount;
         accountRepository.update(balance, accountid);
         Transaction transaction = new Transaction(amount,date,"Credit");
         transactionRepository.save(transaction,accountid);
-        return accountRepository.getbalance(accountid);
+        return "Updated Balance: " + accountRepository.getbalance(accountid);
     }
 
-    public Long withdraw(Long amount, Long accountid, String date) {
+    public String withdraw(Long amount, Long accountid, String date) {
         Long balance = accountRepository.getbalance(accountid);
         if (amount > balance) {
             System.out.println("Insufficient Balance");
@@ -48,7 +48,7 @@ public class CustomerService {
             accountRepository.update(balance, accountid);
             Transaction transaction = new Transaction(amount, date, "Debit");
             transactionRepository.save(transaction, accountid);
-        }  return accountRepository.getbalance(accountid);
+        }  return "Updated Balance: " + accountRepository.getbalance(accountid);
     }
 
     public List getdetails(Long accountid) {

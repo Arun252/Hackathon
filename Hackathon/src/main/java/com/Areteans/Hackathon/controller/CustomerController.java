@@ -25,12 +25,12 @@ public class CustomerController {
     }
 
     @PostMapping(path = "deposit" , consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Long deposit(@RequestBody Map<String, Object> map) {
+    public String deposit(@RequestBody Map<String, Object> map) {
         return customerService.deposit(Long.valueOf((String)map.get("amount")) ,Long.valueOf((String)map.get("accountid")), (String)map.get("date"));
     }
 
     @PostMapping(path = "withdraw" , consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Long withdraw(@RequestBody Map<String, Object> map) {
+    public String withdraw(@RequestBody Map<String, Object> map) {
         return customerService.withdraw(Long.valueOf((String)map.get("amount")) ,Long.valueOf((String)map.get("accountid")), (String)map.get("date"));
     }
 
